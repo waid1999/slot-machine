@@ -145,8 +145,11 @@ window.game = window.game || {};
         ]);
 
         stage.addChild(reels);
+        reels.x = 130;
+        reels.y = -180;	
+		reels.reelContainer.mask.clear();
+		reels.reelContainer.mask.drawRect(gameFrame.x, gameFrame.y - 30, gameFrame.width, 430);
         this._reels = reels;
-
     };
 
     /**
@@ -158,6 +161,7 @@ window.game = window.game || {};
         var spinButton = this._spinButton;
         spinButton.clickSignal.addOnce(this._beginSpin, this);
         spinButton.setEnabled(true);
+        console.log("_waitForSpin")
     };
 
     /**
@@ -172,6 +176,8 @@ window.game = window.game || {};
         var reels = this._reels;
         reels.spinBeganSignal.addOnce(this._onSpinBegan, this);
         reels.startSpin();
+        // console.log("_beginSpin")
+        // reels.spinBeganSignal.dispatch();
     };
 
     /**
@@ -181,6 +187,7 @@ window.game = window.game || {};
     p._onSpinBegan = function()
     {   
         setTimeout(this._onStopSpin.bind(this), 1000/*1000 + (Math.random() * 2000)*/);
+        // console.log("_onSpinBegan")
     };
 
     /**
@@ -193,6 +200,8 @@ window.game = window.game || {};
         var reels = this._reels;
         reels.spinCompleteSignal.addOnce(this._waitForSpin, this);
         reels.stopSpin();
+        // console.log("_onStopSpin")
+        // reels.spinCompleteSignal.dispatch()
     };
 
     window.game.Game = Game;
