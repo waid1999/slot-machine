@@ -177,7 +177,7 @@ window.game = window.game || {};
         reels.spinBeganSignal.addOnce(this._onSpinBegan, this);
         reels.startSpin();
         // console.log("_beginSpin")
-        // reels.spinBeganSignal.dispatch();
+        reels.spinBeganSignal.dispatch();
     };
 
     /**
@@ -201,7 +201,7 @@ window.game = window.game || {};
         reels.spinCompleteSignal.addOnce(this._waitForSpin, this);
         reels.stopSpin();
         // console.log("_onStopSpin")
-        // reels.spinCompleteSignal.dispatch()
+        reels.spinCompleteSignal.dispatch()
     };
 
     window.game.Game = Game;

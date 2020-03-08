@@ -66,9 +66,10 @@ window.game = window.game || {};
             // Build the symbols
 
             for (let j = 0, index = 0; j < 32; j++) {
+                console.log("length " + this._symbolTextures.length)
                 
-                const symbol = new PIXI.Sprite(this._symbolTextures[index]) //new PIXI.Sprite(this._symbolTextures[Math.floor(Math.random() * this._symbolTextures.length)]); 
-                if(index >= 9){
+                const symbol =  new PIXI.Sprite(this._symbolTextures[index]) //new PIXI.Sprite(this._symbolTextures[Math.floor(Math.random() * this._symbolTextures.length)]);
+                if(index >= this._symbolTextures.length - 1){
                     index = 0
                 }else{
                     index++
@@ -81,6 +82,7 @@ window.game = window.game || {};
                 rc.addChild(symbol);
             }
             reels.push(reel);
+            console.log("reel " + reel.symbols[10].texture.rotate)
         }
 
         let thing = new PIXI.Graphics();
@@ -96,21 +98,19 @@ window.game = window.game || {};
 
     p.startSpin = function()
     {   
-        var randomValue = [R(0,22), R(0,22), R(0,22), R(0, 22)];
+        var randomValue = [R(0,29), R(0,29), R(0,29), R(0, 29)];
         var tweenArray = [];
         for(let i = 0, delay = 0; i < this.reels.length; i++){
             tweenArray[i] = new TweenMax.to(this.reels[i].container, 1.5,
                 {
-                    y: -318 * randomValue[i],
+                    y: -318*randomValue[i],
                     ease: Bounce.easeOut,
                     yoyo:true,
                     delay: delay
                 }); 
             delay += 0.1;
         }
-        // tweenArray[tweenArray.length - 1].eventCallback("onComplete", function(){
-            this.spinBeganSignal.dispatch();
-        // }.bind(this))
+        this.spinBeganSignal.dispatch();
             
 
         function R(min,max) {
@@ -124,6 +124,7 @@ window.game = window.game || {};
      */
     p.stopSpin = function()
     {
+        // console.log("reels are stopped " + this.reels)
     };
 
     window.game.Reels = Reels;
