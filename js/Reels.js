@@ -66,15 +66,12 @@ window.game = window.game || {};
             // Build the symbols
 
             for (let j = 0, index = 0; j < 32; j++) {
-                console.log("length " + this._symbolTextures.length)
-                
-                const symbol =  new PIXI.Sprite(this._symbolTextures[index]) //new PIXI.Sprite(this._symbolTextures[Math.floor(Math.random() * this._symbolTextures.length)]);
+                const symbol =  new PIXI.Sprite(this._symbolTextures[index]);
                 if(index >= this._symbolTextures.length - 1){
                     index = 0
                 }else{
                     index++
                 }
-                
                 symbol.y = j * SYMBOL_SIZE;
                 symbol.scale.x = symbol.scale.y = Math.min(SYMBOL_SIZE / symbol.width, SYMBOL_SIZE / symbol.height);
                 symbol.x = Math.round((SYMBOL_SIZE - symbol.width) / 2);
@@ -82,7 +79,6 @@ window.game = window.game || {};
                 rc.addChild(symbol);
             }
             reels.push(reel);
-            console.log("reel " + reel.symbols[10].texture.rotate)
         }
 
         let thing = new PIXI.Graphics();
@@ -109,9 +105,7 @@ window.game = window.game || {};
                     delay: delay
                 }); 
             delay += 0.1;
-        }
-        this.spinBeganSignal.dispatch();
-            
+        }            
 
         function R(min,max) {
             return Math.floor(Math.random() * (max - min) + min);
@@ -124,7 +118,6 @@ window.game = window.game || {};
      */
     p.stopSpin = function()
     {
-        // console.log("reels are stopped " + this.reels)
     };
 
     window.game.Reels = Reels;

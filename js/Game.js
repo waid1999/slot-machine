@@ -161,7 +161,6 @@ window.game = window.game || {};
         var spinButton = this._spinButton;
         spinButton.clickSignal.addOnce(this._beginSpin, this);
         spinButton.setEnabled(true);
-        console.log("_waitForSpin")
     };
 
     /**
@@ -172,11 +171,9 @@ window.game = window.game || {};
     {
         this._spinButton.setEnabled(false);
 
-        // Start the reels spinning
         var reels = this._reels;
         reels.spinBeganSignal.addOnce(this._onSpinBegan, this);
         reels.startSpin();
-        // console.log("_beginSpin")
         reels.spinBeganSignal.dispatch();
     };
 
@@ -186,8 +183,7 @@ window.game = window.game || {};
      */
     p._onSpinBegan = function()
     {   
-        setTimeout(this._onStopSpin.bind(this), 1000/*1000 + (Math.random() * 2000)*/);
-        // console.log("_onSpinBegan")
+        setTimeout(this._onStopSpin.bind(this), 1000);
     };
 
     /**
@@ -200,7 +196,6 @@ window.game = window.game || {};
         var reels = this._reels;
         reels.spinCompleteSignal.addOnce(this._waitForSpin, this);
         reels.stopSpin();
-        // console.log("_onStopSpin")
         reels.spinCompleteSignal.dispatch()
     };
 
